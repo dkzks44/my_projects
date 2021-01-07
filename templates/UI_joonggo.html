@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+
+        <script>
+            function openClose() {
+                if ($("#check_box").css("display") == "block") {
+                    $("#check_box").hide();
+                    $("#btn_check_box").text("검색할 사이트 선택");
+                } else {
+                    $("#check_box").show();
+                    $("#btn_check_box").text("검색할 사이트 선택 완료");
+                }
+            }
+        </script>
+
+        <!-- 구글폰트 -->
+        <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+
+
+        <title>USED</title>
+
+        <!-- style -->
+        <style type="text/css">
+            * {
+                text-align: center;
+                font-family: 'Stylish', sans-serif;
+            }
+
+            .wrap {
+                width: 900px;
+                margin: auto;
+            }
+
+            .display-4 {
+                background: #55ffaa;
+                background: -webkit-linear-gradient(left, #55ff55, #55ffff);
+                background: -moz-linear-gradient(right, #55ff55, #55ffff);
+                background: -o-linear-gradient(right, #55ff55, #55ffff);
+                background: linear-gradient(to right, #55ff55, #55ffff);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                font-size: 200px;
+                font-weight: bold;
+            }
+
+            .search_button {
+                background-color: black;
+                color: yellow;
+                width: 50px;
+                height: 40px
+            }
+
+            .search_box {
+                margin-top: 50px;
+                margin-bottom: 100px;
+            }
+
+            .input-group mb-3 {
+                width: 100px;
+            }
+
+            .comment {
+                color: blue;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+
+    <div class="wrap">
+        <h class="display-4">USED</h>
+        <div class="search_box">
+            <input type="search" style="width:500px;height:43px;font-size:30px;">
+            <input class="search_button" type="submit" value="검색"><br>
+            <button onclick="openClose()" id="btn_check_box" type="button" class="btn btn-info">검색할 사이트 선택</button>
+            <div id="check_box">
+            <td>
+                <input type="checkbox" name="hobby" value="1">중고나라
+                <input type="checkbox" name="hobby" value="2">당근마켓
+                <input type="checkbox" name="hobby" value="3">헬로마켓
+            </td>
+            </div>
+            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');" id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
+            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');" id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
+            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');" id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
+            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');" id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
+            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');" id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
+        </div>
+        <div class="card-columns">
+            <div class="card">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a href="#" class="card-title">여기 기사 제목이 들어가죠</a>
+                    <p class="card-text">기사의 요약 내용이 들어갑니다. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세 무궁화 삼천리 화려강산...</p>
+                    <p class="card-text comment">여기에 코멘트가 들어갑니다.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a href="#" class="card-title">여기 기사 제목이 들어가죠</a>
+                    <p class="card-text">기사의 요약 내용이 들어갑니다. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세 무궁화 삼천리 화려강산...</p>
+                    <p class="card-text comment">여기에 코멘트가 들어갑니다.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a href="#" class="card-title">여기 기사 제목이 들어가죠</a>
+                    <p class="card-text">기사의 요약 내용이 들어갑니다. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세 무궁화 삼천리 화려강산...</p>
+                    <p class="card-text comment">여기에 코멘트가 들어갑니다.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a href="#" class="card-title">여기 기사 제목이 들어가죠</a>
+                    <p class="card-text">기사의 요약 내용이 들어갑니다. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세 무궁화 삼천리 화려강산...</p>
+                    <p class="card-text comment">여기에 코멘트가 들어갑니다.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a href="#" class="card-title">여기 기사 제목이 들어가죠</a>
+                    <p class="card-text">기사의 요약 내용이 들어갑니다. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세 무궁화 삼천리 화려강산...</p>
+                    <p class="card-text comment">여기에 코멘트가 들어갑니다.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a href="#" class="card-title">여기 기사 제목이 들어가죠</a>
+                    <p class="card-text">기사의 요약 내용이 들어갑니다. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세 무궁화 삼천리 화려강산...</p>
+                    <p class="card-text comment">여기에 코멘트가 들어갑니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+
+</html>
