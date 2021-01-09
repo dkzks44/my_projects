@@ -32,18 +32,16 @@
                         for (let i = 0; i < searchings.length; i++) {
                             let searching = searchings[i]
                             // 5. star[i] 요소의 name, url, img_url, recent, like 키 값을 활용하여 값을 조회합니다.
-                            let imgUrl = searching['img_url']
                             let productUrl = searching['product_url']
-                            let name = searching['name']
-                            let price = searching  ['price']
-                            let location = searching['location']
-
+                            let imgUrl = searching['product_img']
+                            let name = searching['product_name']
+                            let price = searching  ['product_price']
                             let tempHtml = `<div class="card">
                                              <img class="card-img-top" src="${imgUrl}" alt="Card image cap">
                                              <div class="card-body">
                                               <a href="${productUrl}" target="_blank" class="card-title">${name}</a>
                                               <p class="card-text">${price}</p>
-                                              <p class="card-text comment">${location}</p>
+                                              <p class="card-text comment">location</p>
                                                 </div>
                                             </div>`;
                             // 7. #star-box에 temp_html을 붙입니다.
@@ -120,7 +118,7 @@
     <div class="wrap">
         <h class="display-4">USED</h>
         <div class="search_box">
-            <form action="/post" method="post">
+            <form action="/search">
                 <input type="search" style="width:500px;height:43px;font-size:30px;" name="search_word">
                 <input onclick="click_search()" class="search_button" type="submit" value="검색">
             </form>
@@ -134,15 +132,13 @@
                 </td>
             </div>
             <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
-               id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
+               id="_nx_search_option_sort_link">정확도순<i class="spnew ico_arr"></i></a>
             <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
-               id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
+               id="_nx_search_option_sort_link">낮은가격순<i class="spnew ico_arr"></i></a>
             <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
-               id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
+               id="_nx_search_option_sort_link">높은가격순<i class="spnew ico_arr"></i></a>
             <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
-               id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
-            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
-               id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
+               id="_nx_search_option_sort_link">가까운위치순<i class="spnew ico_arr"></i></a>
         </div>
         <div class="card-columns">
             <div class="card">
