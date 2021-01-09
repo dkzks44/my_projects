@@ -21,6 +21,51 @@
                 crossorigin="anonymous"></script>
 
         <script>
+
+
+            function click_search() {
+
+                $('#search-box').empty()
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/search',
+                    data: {'search_give':},
+                    success: function (response) {
+                        let searchings = response['search_list']
+                        for (let i = 0; i < searchings.length; i++) {
+                            let searching = searchings[i]
+                            // 5. star[i] 요소의 name, url, img_url, recent, like 키 값을 활용하여 값을 조회합니다.
+                            let imgUrl = searching['img_url']
+                            let name = searching['name']
+                            let price = searching  ['price']
+                            let location = searching['location']
+
+                            let tempHtml = `<div class="card">
+                                <div class="card-content">
+                                  <div class="media">
+                                    <div class="media-left">
+                                      <figure class="image is-48x48">
+                                        <img
+                                          src="${imgUrl}"
+                                          alt="Placeholder image"
+                                        />
+                                      </figure>
+                                    </div>
+                                    <div class="media-content">
+                                      <a href="${url}" target="_blank" class="star-name title is-4">${name} (가격 : ${price})</a>
+                                      <p class="subtitle is-6">${location}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>`
+
+                // 7. #star-box에 temp_html을 붙입니다.
+                $('#search-box').append(tempHtml)
+                        }
+                    });
+            }
+
             function openClose() {
                 if ($("#check_box").css("display") == "block") {
                     $("#check_box").hide();
@@ -90,20 +135,25 @@
         <h class="display-4">USED</h>
         <div class="search_box">
             <input type="search" style="width:500px;height:43px;font-size:30px;">
-            <input class="search_button" type="submit" value="검색"><br>
+            <input onclick="click_search()" class="search_button" type="submit" value="검색"><br>
             <button onclick="openClose()" id="btn_check_box" type="button" class="btn btn-info">검색할 사이트 선택</button>
             <div id="check_box">
-            <td>
-                <input type="checkbox" name="hobby" value="1">중고나라
-                <input type="checkbox" name="hobby" value="2">당근마켓
-                <input type="checkbox" name="hobby" value="3">헬로마켓
-            </td>
+                <td>
+                    <input type="checkbox" name="hobby" value="1">중고나라
+                    <input type="checkbox" name="hobby" value="2">당근마켓
+                    <input type="checkbox" name="hobby" value="3">헬로마켓
+                </td>
             </div>
-            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');" id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
-            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');" id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
-            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');" id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
-            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');" id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
-            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');" id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
+            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
+               id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
+            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
+               id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
+            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
+               id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
+            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
+               id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
+            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
+               id="_nx_search_option_sort_link">정렬<i class="spnew ico_arr"></i></a>
         </div>
         <div class="card-columns">
             <div class="card">
