@@ -21,49 +21,35 @@
                 crossorigin="anonymous"></script>
 
         <script>
-
-
             function click_search() {
-
-                $('#search-box').empty()
-
+                // $('#search-box').empty()
                 $.ajax({
                     type: 'GET',
                     url: '/search',
-                    data: {'search_give':},
+                    data: {'search_give': search_word},
                     success: function (response) {
-                        let searchings = response['search_list']
+                        let searchings = response['searching_info']
                         for (let i = 0; i < searchings.length; i++) {
                             let searching = searchings[i]
                             // 5. star[i] 요소의 name, url, img_url, recent, like 키 값을 활용하여 값을 조회합니다.
                             let imgUrl = searching['img_url']
+                            let productUrl = searching['product_url']
                             let name = searching['name']
                             let price = searching  ['price']
                             let location = searching['location']
 
                             let tempHtml = `<div class="card">
-                                <div class="card-content">
-                                  <div class="media">
-                                    <div class="media-left">
-                                      <figure class="image is-48x48">
-                                        <img
-                                          src="${imgUrl}"
-                                          alt="Placeholder image"
-                                        />
-                                      </figure>
-                                    </div>
-                                    <div class="media-content">
-                                      <a href="${url}" target="_blank" class="star-name title is-4">${name} (가격 : ${price})</a>
-                                      <p class="subtitle is-6">${location}</p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>`
-
-                // 7. #star-box에 temp_html을 붙입니다.
-                $('#search-box').append(tempHtml)
+                                             <img class="card-img-top" src="${imgUrl}" alt="Card image cap">
+                                             <div class="card-body">
+                                              <a href="${productUrl}" target="_blank" class="card-title">${name}</a>
+                                              <p class="card-text">${price}</p>
+                                              <p class="card-text comment">${location}</p>
+                                                </div>
+                                            </div>`;
+                            // 7. #star-box에 temp_html을 붙입니다.
+                            $('#search-box').append(tempHtml)
                         }
-                    });
+                    }});
             }
 
             function openClose() {
@@ -134,8 +120,11 @@
     <div class="wrap">
         <h class="display-4">USED</h>
         <div class="search_box">
-            <input type="search" style="width:500px;height:43px;font-size:30px;">
-            <input onclick="click_search()" class="search_button" type="submit" value="검색"><br>
+            <form action="/post" method="post">
+                <input type="search" style="width:500px;height:43px;font-size:30px;" name="search_word">
+                <input onclick="click_search()" class="search_button" type="submit" value="검색">
+            </form>
+            <br>
             <button onclick="openClose()" id="btn_check_box" type="button" class="btn btn-info">검색할 사이트 선택</button>
             <div id="check_box">
                 <td>
