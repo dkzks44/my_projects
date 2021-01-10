@@ -22,7 +22,6 @@
 
         <script>
             function click_search() {
-                // $('#search-box').empty()
                 $.ajax({
                     type: 'GET',
                     url: '/search',
@@ -30,25 +29,25 @@
                     success: function (response) {
                         let searchings = response['searching_info']
                         for (let i = 0; i < searchings.length; i++) {
-                            let searching = searchings[i]
-                            // 5. star[i] 요소의 name, url, img_url, recent, like 키 값을 활용하여 값을 조회합니다.
-                            let productUrl = searching['product_url']
-                            let imgUrl = searching['product_img']
-                            let name = searching['product_name']
-                            let price = searching  ['product_price']
-                            let tempHtml = `<div class="card">
-                                             <img class="card-img-top" src="${imgUrl}" alt="Card image cap">
+                            makeInfo(searchings[i]["product_url"], searchings[i]["product_img"], searchings[i]["product_name"], searchings[i]["product_price"])
+                        }
+                    }
+                })
+            }
+
+                function makeInfo(product_url, product_img, product_name,product_price)
+                {
+                    let tempHtml = `<div class="card">
+                                             <img class="card-img-top" src="${product_img}" alt="Card image cap">
                                              <div class="card-body">
-                                              <a href="${productUrl}" target="_blank" class="card-title">${name}</a>
-                                              <p class="card-text">${price}</p>
+                                              <a href="${product_url}" target="_blank" class="card-title">${product_name}</a>
+                                              <p class="card-text">${product_price}</p>
                                               <p class="card-text comment">location</p>
                                                 </div>
                                             </div>`;
-                            // 7. #star-box에 temp_html을 붙입니다.
-                            $('#search-box').append(tempHtml)
-                        }
-                    }});
-            }
+                    $('#search-box').append(tempHtml)
+                }
+
 
             function openClose() {
                 if ($("#check_box").css("display") == "block") {
@@ -140,7 +139,7 @@
             <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
                id="_nx_search_option_sort_link">가까운위치순<i class="spnew ico_arr"></i></a>
         </div>
-        <div class="card-columns">
+        <div class="card-columns" id="search-box">
             <div class="card">
                 <img class="card-img-top"
                      src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
