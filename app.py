@@ -10,18 +10,20 @@ def home():
 
 @app.route('/search', methods=['GET'])
 def search_word():
-    search_receive = request.form['search_give']
+    search_receive = request.args.get('search_give')
     headers = {
          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     url = 'https://www.daangn.com/search/'
     plus_url = search_receive
-    full_url = url + plus_url
+    more_url = '/more/flea_market?page='
+    full_url = url + plus_url + more_url
 
     data = requests.get(full_url, headers=headers)
     soup = BeautifulSoup(data.text, 'html.parser')
 
     products = soup.select('#flea-market-wrap > article')
 
+    cards = []
     for product in products:
         a_tag = product.select_one('div.article-info > div > span.article-title')
         if a_tag is not None:
@@ -30,8 +32,9 @@ def search_word():
             price = product.select_one('article > a > div.article-info > p.article-price').text  # td 태그 사이의 텍스트를 가져오기
 
             card = {'product_url': full_url, 'product_img': img, 'product_name': name, 'product_price': price}
+            cards.append(card)
 
-    return jsonify({'result': 'success', 'searching_info': card})
+    return jsonify({'result': 'success', 'searching_info': cards})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
