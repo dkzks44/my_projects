@@ -16,14 +16,32 @@ def search_word():
     url = 'https://www.daangn.com/search/'
     plus_url = search_receive
     more_url = '/more/flea_market?page='
-    full_url = url + plus_url + more_url
+    for page_number in range(1, 5):
+        full_url = url + plus_url + more_url + str(page_number)
+    first_url = url + plus_url
 
     data = requests.get(full_url, headers=headers)
     soup = BeautifulSoup(data.text, 'html.parser')
 
-    products = soup.select('#flea-market-wrap > article')
+    data2 = requests.get(first_url,headers=headers)
+    soup2 = BeautifulSoup(data2.text, 'html.parser')
+
+    # >> # flea-market-wrap > article
+
+    products = soup.select('article')
+    first_products = soup2.select('#flea-market-wrap > article')
 
     cards = []
+    for first_product in first_products:
+        a_tag = first_product.select_one('div.article-info > div > span.article-title')
+        if a_tag is not None:
+            img1 = first_product.select_one('div.card-photo > img')['src']
+            name1 = first_product.select_one('article > a > div.article-info > div > span.article-title').text
+            price1 = first_product.select_one('article > a > div.article-info > p.article-price').text  # td 태그 사이의 텍스트를 가져오기
+
+            card1 = {'product_url': first_url, 'product_img': img1, 'product_name': name1, 'product_price': price1}
+            cards.append(card1)
+
     for product in products:
         a_tag = product.select_one('div.article-info > div > span.article-title')
         if a_tag is not None:
