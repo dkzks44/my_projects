@@ -6,6 +6,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+        <meta property="og:title" content="USED"/>
+        <meta property="og:description" content="중고거래 사이트"/>
+        <meta property="og:image" content="{{ url_for('static', filename='ogimage.png') }}"/>
+
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -21,7 +25,7 @@
                 crossorigin="anonymous"></script>
 
         <script>
-            function click_search(){
+            function click_search() {
                 $('#search-box').children().remove();
                 afterClick_search()
             }
@@ -31,7 +35,12 @@
                 $.ajax({
                     type: 'GET',
                     url: '/search',
-                    data: {'search_give' : search_word},
+                    data: {
+                        'search_give': search_word,
+                        'joonggo_check': joonggo,
+                        'carrot_check': carrot,
+                        'hello_check': hello
+                    },
                     success: function (response) {
                         let searchings = response["searching_info"]
                         for (let i = 0; i < searchings.length; i++) {
@@ -44,9 +53,8 @@
                 })
             }
 
-                function makeInfo(product_url, product_img, product_name,product_price)
-                {
-                    let tempHtml = `<div class="card">
+            function makeInfo(product_url, product_img, product_name, product_price) {
+                let tempHtml = `<div class="card">
                                              <img class="card-img-top" src="${product_img}" alt="Card image cap">
                                              <div class="card-body">
                                               <a href="${product_url}" target="_blank" class="card-title">${product_name}</a>
@@ -54,8 +62,8 @@
                                               <p class="card-text comment">location</p>
                                                 </div>
                                             </div>`;
-                    $('#search-box').append(tempHtml)
-                }
+                $('#search-box').append(tempHtml)
+            }
 
 
             function openClose() {
@@ -124,29 +132,30 @@
     </head>
 
     <div class="wrap">
-        <h class="display-4">USED</h>
+        <h class="display-4"><a href="">USED</a></h>
         <div class="search_box">
             <div>
-                <input id="search_word" type="search" style="width:500px;height:43px;font-size:30px;" name="search_word">
+                <input id="search_word" type="search" style="width:500px;height:43px;font-size:30px;"
+                       name="search_word">
                 <input onclick="click_search()" class="search_button" type="button" value="검색">
             </div>
             <br>
             <button onclick="openClose()" id="btn_check_box" type="button" class="btn btn-info">검색할 사이트 선택</button>
             <div id="check_box">
                 <td>
-                    <input type="checkbox" name="hobby" value="1">중고나라
-                    <input type="checkbox" name="hobby" value="2">당근마켓
-                    <input type="checkbox" name="hobby" value="3">헬로마켓
+                    <input type="checkbox" name="joonggo" value="1">중고나라
+                    <input type="checkbox" name="carrot" value="2">당근마켓
+                    <input type="checkbox" name="hello" value="3">헬로마켓
                 </td>
             </div>
             <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
-               id="_nx_search_option_sort_link">정확도순<i class="spnew ico_arr"></i></a>
+               id="accuracy">정확도순<i class="spnew ico_arr"></i></a>
             <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
-               id="_nx_search_option_sort_link">낮은가격순<i class="spnew ico_arr"></i></a>
+               id="lowPrice">낮은가격순<i class="spnew ico_arr"></i></a>
             <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
-               id="_nx_search_option_sort_link">높은가격순<i class="spnew ico_arr"></i></a>
+               id="highPrice">높은가격순<i class="spnew ico_arr"></i></a>
             <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
-               id="_nx_search_option_sort_link">가까운위치순<i class="spnew ico_arr"></i></a>
+               id="location">가까운위치순<i class="spnew ico_arr"></i></a>
         </div>
         <div class="card-columns" id="search-box">
         </div>
