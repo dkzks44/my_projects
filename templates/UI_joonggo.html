@@ -25,41 +25,45 @@
                 crossorigin="anonymous"></script>
 
         <script>
-            function click_search() {
-                $('#search-box').children().remove();
-                afterClick_search()
-            }
+            $(function () {
+                $("#all").click(function () {
+                    var chk = $(this).is(":checked");//.attr('checked');
+                    if (chk) $(".select_market").prop('checked', true);
+                    else $(".select_market").prop('checked', false);
+                });
+            });
+
+                function click_search() {
+                    $('#search-box').children().remove();
+                    afterClick_search()
+                }
 
             function afterClick_search() {
                 let search_word = $('#search_word').val()
                 $.ajax({
                     type: 'GET',
                     url: '/search',
-                    data: {
-                        'search_give': search_word,
-                        'joonggo_check': joonggo,
-                        'carrot_check': carrot,
-                        'hello_check': hello
-                    },
+                    data: {'search_give': search_word},
                     success: function (response) {
                         let searchings = response["searching_info"]
                         for (let i = 0; i < searchings.length; i++) {
                             makeInfo(searchings[i]["product_url"],
                                 searchings[i]["product_img"],
                                 searchings[i]["product_name"],
-                                searchings[i]["product_price"])
+                                searchings[i]["product_price"],
+                                searchings[i]["product_location"])
                         }
                     }
                 })
             }
 
-            function makeInfo(product_url, product_img, product_name, product_price) {
+            function makeInfo(product_url, product_img, product_name, product_price, product_location) {
                 let tempHtml = `<div class="card">
                                              <img class="card-img-top" src="${product_img}" alt="Card image cap">
                                              <div class="card-body">
                                               <a href="${product_url}" target="_blank" class="card-title">${product_name}</a>
                                               <p class="card-text">${product_price}</p>
-                                              <p class="card-text comment">location</p>
+                                              <p class="card-text comment">${product_location}</p>
                                                 </div>
                                             </div>`;
                 $('#search-box').append(tempHtml)
@@ -143,15 +147,16 @@
             <button onclick="openClose()" id="btn_check_box" type="button" class="btn btn-info">검색할 사이트 선택</button>
             <div id="check_box">
                 <td>
-                    <input type="checkbox" name="joonggo" value="1">중고나라
-                    <input type="checkbox" name="carrot" value="2">당근마켓
-                    <input type="checkbox" name="hello" value="3">헬로마켓
+                    <input type="checkbox" id="all" value="all">전체 선택
+                    <input class = select_market type="checkbox" id="joonggo" value="jg">중고나라
+                    <input class = select_market type="checkbox" id="carrot" value="cr">당근마켓
+                    <input class = select_market type="checkbox" id="hello" value="hl">헬로마켓
                 </td>
             </div>
             <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
                id="accuracy">정확도순<i class="spnew ico_arr"></i></a>
-            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
-               id="lowPrice">낮은가격순<i class="spnew ico_arr"></i></a>
+            <button href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="ascending_order_click()"
+                    id="lowPrice">낮은가격순<i class="spnew ico_arr"></i></button>
             <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
                id="highPrice">높은가격순<i class="spnew ico_arr"></i></a>
             <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
