@@ -1,8 +1,10 @@
 import requests
 import json
+import MongoClient
 from bs4 import BeautifulSoup
 from flask import Flask, render_template, request, jsonify
 
+client = MongoClient('mongodb://sparta:sparta123!@usedmarket.shop', 27017)
 app = Flask(__name__)
 
 @app.route('/')
