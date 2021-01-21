@@ -25,6 +25,12 @@
                 crossorigin="anonymous"></script>
 
         <script>
+            function enter_press() {
+                if(window.event.keyCode==13) {
+                    click_search()
+                }
+            }
+
             $(function () {
                 $("#all").click(function () {
                     var chk = $(this).is(":checked");//.attr('checked');
@@ -63,6 +69,39 @@
                                              <div class="card-body">
                                               <a href="${product_url}" target="_blank" class="card-title">${product_name}</a>
                                               <p class="card-text">${product_price}</p>
+                                              <p class="card-text comment">${product_location}</p>
+                                                </div>
+                                            </div>`;
+                $('#search-box').append(tempHtml)
+            }
+
+            function ascending_order_click() {
+                let search_word = $('#search_word').val()
+                $.ajax({
+                    type: 'GET',
+                    url: '/search',
+                    data: {'search_give': search_word},
+                    success: function (response) {
+                        let searchings = response["searching_info"]
+                        for (let i = 0; i < searchings.length; i++) {
+                            makeInfo_ascending(searchings[i]["product_url"],
+                                searchings[i]["product_img"],
+                                searchings[i]["product_name"],
+                                searchings[i]["product_price"],
+                                searchings[i]["product_location"])
+                        }
+                    }
+                })
+            }
+
+            function makeInfo_ascending(product_url, product_img, product_name, product_price, product_location) {
+                        let ascending = product_price
+                        let price_ascending = ascending.sort(function(a,b) {return a-b})
+                        let tempHtml = `<div class="card">
+                                             <img class="card-img-top" src="${product_img}" alt="Card image cap">
+                                             <div class="card-body">
+                                              <a href="${product_url}" target="_blank" class="card-title">${product_name}</a>
+                                              <p class="card-text">${price_ascending}</p>
                                               <p class="card-text comment">${product_location}</p>
                                                 </div>
                                             </div>`;
@@ -112,13 +151,6 @@
                 font-weight: bold;
             }
 
-            .search_button {
-                background-color: black;
-                color: yellow;
-                width: 50px;
-                height: 40px
-            }
-
             .search_box {
                 margin-top: 50px;
                 margin-bottom: 100px;
@@ -140,11 +172,11 @@
         <div class="search_box">
             <div>
                 <input id="search_word" type="search" style="width:500px;height:43px;font-size:30px;"
-                       name="search_word">
-                <input onclick="click_search()" class="search_button" type="button" value="검색">
+                       name="search_word" onkeypress="enter_press()">
+                <input onclick="click_search()" class="m _tab_search_" type="button" value="검색">
             </div>
             <br>
-            <button onclick="openClose()" id="btn_check_box" type="button" class="btn btn-info">검색할 사이트 선택</button>
+            <button onclick="openClose()" id="btn_check_box" type="button" class="m _tab_option_">검색할 사이트 선택</button>
             <div id="check_box">
                 <td>
                     <input type="checkbox" id="all" value="all">전체 선택
@@ -153,14 +185,10 @@
                     <input class = select_market type="checkbox" id="hello" value="hl">헬로마켓
                 </td>
             </div>
-            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
-               id="accuracy">정확도순<i class="spnew ico_arr"></i></a>
             <button href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="ascending_order_click()"
                     id="lowPrice">낮은가격순<i class="spnew ico_arr"></i></button>
-            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
-               id="highPrice">높은가격순<i class="spnew ico_arr"></i></a>
-            <a href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
-               id="location">가까운위치순<i class="spnew ico_arr"></i></a>
+            <button href="#" role="tab" class="m _tab_option_" aria-selected="false" onclick="return tCR('a=fno.sortlink');"
+               id="highPrice">높은가격순<i class="spnew ico_arr"></i></button>
         </div>
         <div class="card-columns" id="search-box">
         </div>
