@@ -95,7 +95,7 @@
             }
 
             function makeInfo_ascending(product_url, product_img, product_name, product_price, product_location) {
-                        let ascending = product_price
+                        let ascending = product_price.list
                         let price_ascending = ascending.sort(function(a,b) {return a-b})
                         let tempHtml = `<div class="card">
                                              <img class="card-img-top" src="${product_img}" alt="Card image cap">

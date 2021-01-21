@@ -82,6 +82,24 @@ def search_word():
                    'product_price': product_price_jg, 'product_location': product_location_jg}
         cards.append(card_jg)
 
+    url_hello = 'https://www.hellomarket.com/api/search/items?q='
+    full_url_hello = url_hello + search_receive
+    data_hello = requests.get(full_url_hello, headers=headers)
+    soup_hello = BeautifulSoup(data_hello.text, 'html.parser')
+    b = soup_hello.text
+    product_data_hello = json.loads(b)
+
+    for i in range(2, 30):
+        # product_url_hello = product_data_hello["list"][i]["item"]["media"]["imageUrl"]
+        product_image_hello = product_data_hello["list"][i]["item"]["media"]["imageUrl"]
+        product_title_hello = product_data_hello["list"][i]["item"]["title"]
+        product_price_hello = product_data_hello["list"][i]["item"]["property"]["price"]["text"]
+
+        card_jg = {'product_img': product_image_hello, 'product_name': product_title_hello,
+                   'product_price': product_price_hello}
+        cards.append(card_jg)
+
+
     return jsonify({'result': 'success', 'searching_info': cards})
 
 if __name__ == '__main__':
